@@ -14,11 +14,4 @@ public class PersonMCPServer {
         SpringApplication.run(PersonMCPServer.class, args);
     }
 
-    @Bean
-    public ToolCallbackProvider tools(PersonTools personTools) {
-        return MethodToolCallbackProvider.builder()
-                .toolObjects(personTools)
-                .build();
-    }
-
 }
