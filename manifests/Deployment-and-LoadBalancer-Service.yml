@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: findata-deployment
+  name: personmcpserver-deployment
   labels:
-    app: findata
+    app: personmcpserver
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: findata
+      app: personmcpserver
   template:
     metadata:
-      # kubectl rollout history deployment/findata-deployment
+      # kubectl rollout history deployment/personmcpserver-deployment
       annotations:
         kubernetes.io/change-cause: "Updated image to #{VERSION}#"
       labels:
-        app: findata
+        app: personmcpserver
     spec:
       containers:
-        - name: findata
-          image: agilesolutions/findata:latest
+        - name: personmcpserver
+          image: agilesolutions/personmcpserver:latest
           ports:
             - containerPort: 80
           livenessProbe:
@@ -71,13 +71,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: findata-loadbalancer-service
+  name: personmcpserver-loadbalancer-service
   labels:
-    app: findata
+    app: personmcpserver
 spec:
   type: LoadBalancer
   selector:
-    app: findata
+    app: personmcpserver
   ports:
     - port: 80
       targetPort: 80
